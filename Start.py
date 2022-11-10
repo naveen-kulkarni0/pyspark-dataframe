@@ -1,6 +1,3 @@
-import findspark
-findspark.init()
-
 from pyspark.sql import SparkSession
 
 spark = SparkSession \
@@ -16,6 +13,7 @@ source_path = "./glacier-mass-balance.csv"
 processed_df = spark.read.csv(source_path,header=True)
 print("Schema of processed dataframe")
 processed_df.printSchema()
+print(processed_df.show(n=2))
 
 dest_path = "./glacier-mass-balance-1.json"
 processed_df.write.save(dest_path, format  ="json", header = True)
